@@ -95,10 +95,10 @@ const useStyles = makeStyles({
   },
   color: {
     backgroundColor: 'lightgray'
-    },
+  },
   color2: {
-      backgroundColor: 'black'
-    }
+    backgroundColor: 'black'
+  }
 });
 
 function ccyFormat(num) {
@@ -188,10 +188,11 @@ function App() {
 
 
   return (
-    <Grid container spacing={1} alignContent="center" alignItems="center" justify="center" >
+    <>
+    <Grid container>
 
-  
-      <Grid item xs={8} >
+
+      <Grid item xs={12}>
         <AppBar position="static" className={classes.color2}>
           <Typography variant="h6" className={classes.title}>
             Soso Tibia Waste Calculator
@@ -199,10 +200,11 @@ function App() {
         </AppBar>
       </Grid>
 
+      </Grid>
 
-
-      <Grid item xs={5} >
-
+      <Grid container spacing={1}>
+      <Grid item xs></Grid>
+      <Grid item md={6}>
         <div className={classes.loot2}>
           <TextField
             required
@@ -218,7 +220,7 @@ function App() {
             }}
           />
         </div>
-       
+
         <div className={classes.loot2}>
           <TextField
             required
@@ -308,8 +310,10 @@ function App() {
         >TESTE
         </Button>
       </Grid> */}
+          <Grid item xs></Grid>
     </Grid>
 
+</>
   );
 }
 
