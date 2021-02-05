@@ -65,18 +65,25 @@ const useStyles = makeStyles({
   },
   title: {
     flexGrow: 1,
-    marginLeft: 100,
     marginTop: 10,
     marginBottom: 10,
     textAlign: "center",
     alignContent: "center",
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+
   },
   loot: {
     flexGrow: 1,
-    marginLeft: 50,
+    marginLeft: 0,
+    marginBottom: 5,
+    fontFamily: "Roboto",
+    textAlign: "center",
+  },
+  loot2: {
+    flexGrow: 1,
     marginBottom: 10,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    textAlign: "center",
   },
   botao: {
     flexGrow: 1,
@@ -86,6 +93,12 @@ const useStyles = makeStyles({
     alignContent: "center",
     fontFamily: "Roboto"
   },
+  color: {
+    backgroundColor: 'lightgray'
+    },
+  color2: {
+      backgroundColor: 'black'
+    }
 });
 
 function ccyFormat(num) {
@@ -178,8 +191,8 @@ function App() {
     <Grid container spacing={1} alignContent="center" alignItems="center" justify="center" >
 
   
-      <Grid item xs={10}>
-        <AppBar position="static" >
+      <Grid item xs={8} >
+        <AppBar position="static" className={classes.color2}>
           <Typography variant="h6" className={classes.title}>
             Soso Tibia Waste Calculator
           </Typography>
@@ -190,7 +203,7 @@ function App() {
 
       <Grid item xs={5} >
 
-        <div className={classes.loot}>
+        <div className={classes.loot2}>
           <TextField
             required
             size="small"
@@ -206,7 +219,7 @@ function App() {
           />
         </div>
        
-        <div className={classes.loot}>
+        <div className={classes.loot2}>
           <TextField
             required
             size="small"
