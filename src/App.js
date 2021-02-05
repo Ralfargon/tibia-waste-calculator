@@ -18,10 +18,18 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    fontFamily: 'Martel',
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: "center",
+    alignContent: "center",
+    fontSize: 14,
+    fontFamily: "Roboto"
   },
   body: {
     fontSize: 14,
+    textAlign: "center",
+    alignContent: "center",
+    fontFamily: "Roboto"
   },
 }))(TableCell);
 
@@ -29,7 +37,9 @@ const StyledTableRow = withStyles((theme) => ({
   root: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
-      fontFamily: 'Martel',
+      textAlign: "center",
+      alignContent: "center",
+      fontFamily: "Roboto"
     },
   },
 }))(TableRow);
@@ -47,25 +57,34 @@ const rows = [
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 100,
+    minWidth: 50,
+    textAlign: "center",
+    alignContent: "center",
+    fontFamily: "Roboto"
+
   },
   title: {
     flexGrow: 1,
     marginLeft: 100,
-    fontFamily: 'Martel',
     marginTop: 10,
     marginBottom: 10,
+    textAlign: "center",
+    alignContent: "center",
+    fontFamily: "Roboto"
   },
   loot: {
     flexGrow: 1,
+    marginLeft: 50,
     marginBottom: 10,
-    fontFamily: 'Martel',
+    fontFamily: "Roboto"
   },
   botao: {
     flexGrow: 1,
-    marginBottom: 10,
-    fontFamily: 'Martel',
+    marginBottom: 100,
     marginLeft: 150,
+    textAlign: "center",
+    alignContent: "center",
+    fontFamily: "Roboto"
   },
 });
 
@@ -156,8 +175,10 @@ function App() {
 
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
+    <Grid container spacing={1} alignContent="center" alignItems="center" justify="center" >
+
+  
+      <Grid item xs={10}>
         <AppBar position="static" >
           <Typography variant="h6" className={classes.title}>
             Soso Tibia Waste Calculator
@@ -165,13 +186,15 @@ function App() {
         </AppBar>
       </Grid>
 
-      <Grid item xs={1}> </Grid>
 
-      <Grid item xs={10} sm={6}>
+
+      <Grid item xs={5} >
 
         <div className={classes.loot}>
           <TextField
             required
+            size="small"
+            fontFamily="Roboto"
             id="outlined-required"
             label="Loot Total"
             defaultValue=""
@@ -186,6 +209,8 @@ function App() {
         <div className={classes.loot}>
           <TextField
             required
+            size="small"
+            fontFamily="Roboto"
             id="outlined-required"
             label="Potions do EK para o ED"
             defaultValue="0"
@@ -198,7 +223,7 @@ function App() {
         </div>
 
         <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="customized table">
+          <Table className={classes.table} aria-label="customized table" padding="none">
             <TableHead>
               <TableRow>
                 <StyledTableCell align="center">Classe</StyledTableCell>
@@ -216,6 +241,8 @@ function App() {
                   <StyledTableCell align="center">
                     <div className={classes.loot}>
                       <TextField
+                        margin="dense"
+                        size="small"
                         type="number"
                         variant="outlined"
                         onChange={(event, value) => {
@@ -235,25 +262,27 @@ function App() {
               ))}
             </TableBody>
             <TableRow >
-              <TableCell colSpan={1} variant="head">Total</TableCell>
+              <TableCell colSpan={1} variant="head" align="center">Total</TableCell>
               <TableCell align="center" variant="head">{subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
             </TableRow>
 
             <TableRow>
-              <TableCell colSpan={1} variant="head">(Loot) - (Waste)</TableCell>
-              <TableCell align="center">{countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
+              <TableCell colSpan={1} variant="head" align="center">(Loot) - (Waste)</TableCell>
+              <TableCell align="center" >{countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
             </TableRow>
 
             <TableRow>
-              <TableCell colSpan={1} variant="head">(Loot) - (Waste) / Nº de players</TableCell>
+              <TableCell colSpan={1} variant="head" align="center">(Loot) - (Waste) / Nº de players</TableCell>
               <TableCell align="center">{prejuizo()}</TableCell>
 
             </TableRow>
 
           </Table>
         </TableContainer>
+        <div>@Rafinha Enterprise</div>
+
       </Grid>
-      <Grid item xs={1}> </Grid>
+
 
       {/* <Grid item xs={12}>
         <Button
