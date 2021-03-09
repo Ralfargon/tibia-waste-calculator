@@ -195,7 +195,7 @@ function App() {
       <Grid item xs={12}>
         <AppBar position="static" className={classes.color2}>
           <Typography variant="h6" className={classes.title}>
-            Haiisake - Tibia Waste Calculator
+            Heiisuke - Tibia Waste Calculator
           </Typography>
         </AppBar>
       </Grid>
