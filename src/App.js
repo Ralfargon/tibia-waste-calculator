@@ -195,7 +195,7 @@ function App() {
       <Grid item xs={12}>
         <AppBar position="static" className={classes.color2}>
           <Typography variant="h6" className={classes.title}>
-            Soso Tibia Waste Calculator
+            Haiisake - Tibia Waste Calculator
           </Typography>
         </AppBar>
       </Grid>
@@ -294,7 +294,7 @@ function App() {
 
           </Table>
         </TableContainer>
-        <div>@Rafinha Enterprise</div>
+        <div>Como utilizar: Colocar o valor do loot total do party analyser. Depois colocar o Supplies de cada um conforme party analyser. A terceira coluna indica o valor a ser pago para cada um.</div>
 
       </Grid>
 
