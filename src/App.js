@@ -51,6 +51,7 @@ function createData(name, waste, valorpg) {
 const rows = [
   createData('EK', 159),
   createData('ED', 237),
+  createData('ED2', 228),
   createData('RP', 262),
   createData('MS', 305),
 ];
@@ -124,10 +125,13 @@ const difWasteValorTotal = wasteTotal // tem que fazer -> loot(input) MENOS wast
 function App() {
   const [EK, setEK] = useState(0);
   const [ED, setED] = useState(0);
+  const [ED2, setED2] = useState(0);
   const [RP, setRP] = useState(0);
   const [MS, setMS] = useState(0);
+  const [CountTC, setCountTC] = useState(0);
   const [countLoot, setCountLoot] = useState(0);
   const [countPot, setCountPot] = useState(0);
+  const [CountCarta, setCountCarta] = useState(0);
   const classes = useStyles();
 
   function handleChange(value, name) {
@@ -153,56 +157,90 @@ function App() {
         setMS(0)
       else
         setMS(value)
-    }
+
+    } else if (name === "ED2") {
+    if (value === "" || value === undefined || value === null)
+      setED2(0)
+    else
+      setED2(value)
   }
+}
 
-  function prejuizo() {
-    return (countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])) / handleCount()
-  }
-
-  function handleCount() {
-    let count = 0;
-    console.log('EK')
-    console.log(EK)
-    if (EK > 0)
-      count++
-    if (ED > 0)
-      count++
-    if (RP > 0)
-      count++
-    if (MS > 0)
-      count++
-
-    return count
-  }
-
-  function handlePot(value) {
-    console.log({ value });
-    setCountPot(value);
-  }
-
-  function handleLoot(value) {
-    console.log({ value });
-    setCountLoot(value);
-  }
+function prejuizo() {
+  return (countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(ED2) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])) / handleCount()
+}
 
 
-  return (
-    <>
+
+
+
+
+function cartasTC() {
+  const carta = 10;
+  return ((CountCarta * 10) * CountTC )
+}
+
+function DivCartasTC() {
+  return ((CountCarta * 10) * CountTC ) / handleCount()
+}
+
+
+
+
+
+
+function handleCount() {
+  let count = 0;
+  if (EK > 0)
+    count++
+  if (ED > 0)
+    count++
+  if (RP > 0)
+    count++
+  if (MS > 0)
+    count++
+  if (ED2 > 0)
+  count++
+
+  return count
+}
+
+function handlePot(value) {
+  console.log({ value });
+  setCountPot(value);
+}
+
+function handleLoot(value) {
+  console.log({ value });
+  setCountLoot(value);
+}
+
+function handleCarta(value) {
+  console.log({ value });
+  setCountCarta(value);
+}
+
+function handleTC(value) {
+  console.log({ value });
+  setCountTC(value);
+}
+
+return (
+  <>
     <Grid container>
 
 
       <Grid item xs={12}>
         <AppBar position="static" className={classes.color2}>
           <Typography variant="h6" className={classes.title}>
-            Heiisuke - Tibia Waste Calculator
+            Haiisake - Tibia Waste Calculator
           </Typography>
         </AppBar>
       </Grid>
 
-      </Grid>
+    </Grid>
 
-      <Grid container spacing={1}>
+    <Grid container spacing={1}>
       <Grid item xs></Grid>
       <Grid item md={6}>
         <div className={classes.loot2}>
@@ -237,6 +275,38 @@ function App() {
           />
         </div>
 
+        <div className={classes.loot2}>
+          <TextField
+            required
+            size="small"
+            fontFamily="Roboto"
+            id="outlined-required"
+            label="Quantidade de cartas"
+            defaultValue="0"
+            type="number"
+            variant="outlined"
+            onChange={(event, value) => {
+              handleCarta(event.target.value, value);
+            }}
+          />
+        </div>
+
+        <div className={classes.loot2}>
+          <TextField
+            required
+            size="small"
+            fontFamily="Roboto"
+            id="outlined-required"
+            label="Valor da TC"
+            defaultValue="0"
+            type="number"
+            variant="outlined"
+            onChange={(event, value) => {
+              handleTC(event.target.value, value);
+            }}
+          />
+        </div>
+
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table" padding="none">
             <TableHead>
@@ -267,10 +337,11 @@ function App() {
                     </div>
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {row.name === 'EK' && EK > 0 ? <TableCell align="center" variant="head">{parseInt(EK) + parseInt(prejuizo()) + parseInt(countPot)}</TableCell> : null}
-                    {row.name === 'ED' && ED > 0 ? <TableCell align="center" variant="head">{parseInt(ED) + parseInt(prejuizo()) - parseInt(countPot)}</TableCell> : null}
-                    {row.name === 'RP' && RP > 0 ? <TableCell align="center" variant="head">{parseInt(RP) + parseInt(prejuizo())}</TableCell> : null}
-                    {row.name === 'MS' && MS > 0 ? <TableCell align="center" variant="head">{parseInt(MS) + parseInt(prejuizo())}</TableCell> : null}
+                    {row.name === 'EK' && EK > 0 ? <TableCell align="center" variant="head">{parseInt(EK) + parseInt(prejuizo()) + parseInt(countPot) - parseInt(DivCartasTC())}</TableCell> : null}
+                    {row.name === 'ED' && ED > 0 ? <TableCell align="center" variant="head">{parseInt(ED) + parseInt(prejuizo()) - parseInt(countPot) - parseInt(DivCartasTC())}</TableCell> : null}
+                    {row.name === 'ED2' && ED2 > 0 ? <TableCell align="center" variant="head">{parseInt(ED2) + parseInt(prejuizo()) - parseInt(DivCartasTC())}</TableCell> : null}
+                    {row.name === 'RP' && RP > 0 ? <TableCell align="center" variant="head">{parseInt(RP) + parseInt(prejuizo()) - parseInt(DivCartasTC())}</TableCell> : null}
+                    {row.name === 'MS' && MS > 0 ? <TableCell align="center" variant="head">{parseInt(MS) + parseInt(prejuizo()) - parseInt(DivCartasTC())}</TableCell> : null}
                   </StyledTableCell>
                   <StyledTableCell align="center">{row.valorpg}</StyledTableCell>
                 </StyledTableRow>
@@ -278,19 +349,29 @@ function App() {
             </TableBody>
             <TableRow >
               <TableCell colSpan={1} variant="head" align="center">Total</TableCell>
-              <TableCell align="center" variant="head">{subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
+              <TableCell align="center" variant="head">{subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(ED2) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell colSpan={1} variant="head" align="center">(Loot) - (Waste)</TableCell>
-              <TableCell align="center" >{countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
+              <TableCell align="center" >{countLoot - subtotal([{ waste: parseInt(EK) }, { waste: parseInt(ED) }, { waste: parseInt(ED2) }, { waste: parseInt(RP) }, { waste: parseInt(MS) }])}</TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell colSpan={1} variant="head" align="center">(Loot) - (Waste) / Nº de players</TableCell>
-              <TableCell align="center">{prejuizo()}</TableCell>
-
+              <TableCell align="center">{parseInt(prejuizo())}</TableCell>
             </TableRow>
+
+            <TableRow>
+              <TableCell colSpan={1} variant="head" align="center">Valor das cartas</TableCell>
+              <TableCell align="center">{parseInt(cartasTC())}</TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell colSpan={1} variant="head" align="center">Valor das cartas/Players</TableCell>
+              <TableCell align="center">{parseInt(DivCartasTC())}</TableCell>
+            </TableRow>
+
 
           </Table>
         </TableContainer>
@@ -310,11 +391,12 @@ function App() {
         >TESTE
         </Button>
       </Grid> */}
-          <Grid item xs></Grid>
+      <Grid item xs></Grid>
     </Grid>
 
-</>
-  );
+  </>
+);
 }
 
 export default App;
+
