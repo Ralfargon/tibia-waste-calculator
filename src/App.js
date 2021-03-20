@@ -86,6 +86,13 @@ const useStyles = makeStyles({
     fontFamily: "Roboto",
     textAlign: "center",
   },
+  loot3: {
+    flexGrow: 1,
+    marginBottom: 10,
+    marginTop: 20,
+    fontFamily: "Roboto",
+    textAlign: "center",
+  },
   botao: {
     flexGrow: 1,
     marginBottom: 100,
@@ -243,7 +250,7 @@ return (
     <Grid container spacing={1}>
       <Grid item xs></Grid>
       <Grid item md={6}>
-        <div className={classes.loot2}>
+        <div className={classes.loot3}>
           <TextField
             required
             size="small"
